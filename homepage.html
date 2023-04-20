@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goodman Employee Portal</title>
+    <link rel="website icon" type="png" href="company-logo.png">
+    <style>
+        body {
+
+            color: #77ac1b;
+            font-style: normal;
+            line-height: normal;
+            font-size: 14px;
+            font-family: "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+        }
+
+        .header-icon {
+            text-transform: uppercase;
+            padding: 10px 6px;
+            font-family: "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .selected-icon {
+            text-transform: uppercase;
+            padding: 10px 6px;
+            font-family: "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 20px;
+            background-color: #77ac1b40;
+        }
+
+        .selected-icon:hover {
+            background-color: #77ac1b96;
+            color: white;
+        }
+
+        .globe-icon {
+            text-transform: uppercase;
+            padding: 10px 6px;
+            font-family: "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+            font-weight: 500;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .header-icon:hover {
+            background-color: #77ac1b;
+            color: white;
+        }
+
+        .header-icon:active {
+            opacity: 0.3;
+        }
+
+        .header {
+            display: inline-block;
+            margin-left: 130px;
+        }
+
+        .logo {
+            margin-left: 50px;
+            display: inline-block;
+            text-transform: uppercase;
+            line-height: 18px;
+        }
+
+        .header-nav {
+            margin-top: 20px;
+            display: flex;
+        }
+
+        #wifi-loader {
+            --background: #77ac1bb7;
+            --front-color: #77ac1b;
+            --back-color: #c3c8de;
+            --text-color: #414856;
+            width: 64px;
+            height: 64px;
+            border-radius: 50px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 100px;
+            margin-top: 100px;
+        }
+
+        #wifi-loader svg {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #wifi-loader svg circle {
+            position: absolute;
+            fill: none;
+            stroke-width: 6px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transform: rotate(-100deg);
+            transform-origin: center;
+        }
+
+        #wifi-loader svg circle.back {
+            stroke: var(--back-color);
+        }
+
+        #wifi-loader svg circle.front {
+            stroke: var(--front-color);
+        }
+
+        #wifi-loader svg.circle-outer {
+            height: 6px;
+            width: 6px;
+        }
+
+        #wifi-loader svg.circle-outer circle {
+            stroke-dasharray: 62.75 188.25;
+        }
+
+        #wifi-loader svg.circle-outer circle.back {
+            animation: circle-outer135 1.8s ease infinite 0.3s;
+        }
+
+        #wifi-loader svg.circle-outer circle.front {
+            animation: circle-outer135 1.8s ease infinite 0.15s;
+        }
+
+        #wifi-loader svg.circle-middle {
+            height: 60px;
+            width: 60px;
+        }
+
+        #wifi-loader svg.circle-middle circle {
+            stroke-dasharray: 42.5 127.5;
+        }
+
+        #wifi-loader svg.circle-middle circle.back {
+            animation: circle-middle6123 1.8s ease infinite 0.25s;
+        }
+
+        #wifi-loader svg.circle-middle circle.front {
+            animation: circle-middle6123 1.8s ease infinite 0.1s;
+        }
+
+        #wifi-loader svg.circle-inner {
+            height: 34px;
+            width: 34px;
+        }
+
+        #wifi-loader svg.circle-inner circle {
+            stroke-dasharray: 22 66;
+        }
+
+        #wifi-loader svg.circle-inner circle.back {
+            animation: circle-inner162 1.8s ease infinite 0.2s;
+        }
+
+        #wifi-loader svg.circle-inner circle.front {
+            animation: circle-inner162 1.8s ease infinite 0.05s;
+        }
+
+        #wifi-loader .text {
+            position: absolute;
+            bottom: -40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: lowercase;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+        }
+
+        #wifi-loader .text::before,
+        #wifi-loader .text::after {
+            content: attr(data-text);
+        }
+
+        #wifi-loader .text::before {
+            color: var(--text-color);
+        }
+
+        #wifi-loader .text::after {
+            color: var(--front-color);
+            animation: text-animation76 3.6s ease infinite;
+            position: absolute;
+            left: 0;
+        }
+
+        @keyframes circle-outer135 {
+            0% {
+                stroke-dashoffset: 25;
+            }
+
+            25% {
+                stroke-dashoffset: 0;
+            }
+
+            65% {
+                stroke-dashoffset: 301;
+            }
+
+            80% {
+                stroke-dashoffset: 276;
+            }
+
+            100% {
+                stroke-dashoffset: 276;
+            }
+        }
+
+        @keyframes circle-middle6123 {
+            0% {
+                stroke-dashoffset: 17;
+            }
+
+            25% {
+                stroke-dashoffset: 0;
+            }
+
+            65% {
+                stroke-dashoffset: 204;
+            }
+
+            80% {
+                stroke-dashoffset: 187;
+            }
+
+            100% {
+                stroke-dashoffset: 187;
+            }
+        }
+
+        @keyframes circle-inner162 {
+            0% {
+                stroke-dashoffset: 9;
+            }
+
+            25% {
+                stroke-dashoffset: 0;
+            }
+
+            65% {
+                stroke-dashoffset: 106;
+            }
+
+            80% {
+                stroke-dashoffset: 97;
+            }
+
+            100% {
+                stroke-dashoffset: 97;
+            }
+        }
+
+        @keyframes text-animation76 {
+            0% {
+                clip-path: inset(0 100% 0 0);
+            }
+
+            50% {
+                clip-path: inset(0);
+            }
+
+            100% {
+                clip-path: inset(0 0 0 100%);
+            }
+        }
+
+        .done {
+            width: 20px;
+            vertical-align: bottom;
+        }
+
+        .process {
+            padding-top: 100px;
+            margin-bottom: 2px;
+            color: green;
+            background-color: rgb(245, 235, 235);
+            padding-left: 10px;
+        }
+
+        .processing {
+            margin-top: 2px;
+            margin-bottom: 2px;
+            color: green;
+            background-color: rgb(245, 235, 235);
+            padding-left: 10px;
+        }
+
+        .pending {
+            margin-top: 2px;
+            padding-bottom: 32px;
+            color: rgb(157, 157, 157);
+            background-color: rgb(245, 235, 235);
+            padding-left: 10px;
+            cursor: wait;
+        }
+
+        .text {
+            display: block;
+        }
+
+        .left-page {
+            margin-left: 50px;
+            width: 250px;
+            background-color: rgb(245, 235, 235);
+            padding-left: 10px;
+            display: inline-block;
+        }
+
+        .left-side {
+            display: inline-block;
+        }
+
+        .important-info {
+            display: inline-block;
+        }
+
+        .window {
+            background-color: #77ac1b;
+            color: white;
+            border-radius: 5px 5px 0px 0px;
+            padding-left: 5px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin-right: 5px;
+            display: block;
+        }
+
+        .announcement-window {
+            background-color: rgb(241, 153, 153);
+            font-size: 12px;
+            margin-left: 5px;
+            margin-top: 5px;
+            margin-right: 5px;
+            color: rgb(171, 90, 90);
+            padding-left: 5px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border-color: rgb(188, 114, 114);
+            border-width: 1px;
+            border-style: solid;
+            margin-left: 5px;
+            margin-right: 5px;
+            border-radius: 5px 5px 0px 0px;
+            display: block;
+        }
+
+        .announcement {
+            font-size: 12px;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 5px;
+            border-color: rgb(188, 114, 114);
+            border-width: 1px;
+            border-style: solid;
+            margin-left: 5px;
+            margin-right: 5px;
+            padding-bottom: 5px;
+            color: black;
+            display: block;
+        }
+
+        .alert {
+            border-color: #77ac1b;
+            border-width: 1px;
+            border-style: solid;
+            padding-bottom: 10px;
+            background-color: aliceblue;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        .loading {
+            padding-bottom: 75px;
+        }
+
+        .alert-text {
+            display: inline-block;
+        }
+
+        .center-page {
+            display: inline-block;
+            vertical-align: top;
+            width: 500px;
+        }
+
+        .nok {
+            background-color: #77ac1b;
+            color: white;
+            padding-left: 50px;
+        }
+
+
+        .required {
+            color: red;
+        }
+
+        .dob {
+            font-size: 14px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            height: 27px;
+            width: 115px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 15px;
+        }
+
+        .zipcode {
+            font-size: 14px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            height: 27px;
+            width: 70px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 43px;
+        }
+
+        .phone {
+            font-size: 14px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            height: 27px;
+            width: 100px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 5px;
+        }
+
+        .sex {
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            padding-left: 1px;
+            padding-right: 1px;
+            margin-left: 70px;
+            margin-bottom: 1opx;
+        }
+
+        .mname {
+            width: 50px;
+            height: 25px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-transform: uppercase;
+            margin-left: 90px;
+        }
+
+        .fname {
+            width: 250px;
+            height: 25px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 26px;
+            margin-top: 10px;
+        }
+
+        .lname {
+            width: 250px;
+            height: 25px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 26px;
+        }
+
+        .address {
+            width: 250px;
+            height: 25px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 44px;
+        }
+
+        .city {
+            width: 250px;
+            height: 25px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 69px;
+        }
+
+        .state {
+            width: 250px;
+            height: 25px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 63px;
+        }
+
+        .country {
+            width: 150px;
+            height: 25px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 49px;
+            margin-bottom: 10px;
+        }
+
+        .email {
+            width: 150px;
+            height: 25px;
+            border-color: #77ac1b;
+            border-radius: 7px;
+            border-width: 1px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 63px;
+            margin-bottom: 10px;
+        }
+
+        .control {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: #77ac1b;
+        }
+
+        .portal {
+            margin-top: 0px;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background-size: cover;
+            height: 100vh;
+        }
+
+
+        .box {
+            width: 40%;
+            margin: 0 auto;
+            background: none;
+            padding: 35px;
+            border: 2px solid #fff;
+            border-radius: 20px/50px;
+            background-clip: padding-box;
+            text-align: center;
+        }
+
+        .button {
+            font-size: 1em;
+            padding-left: 60px;
+            padding-right: 60px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            color: #fff;
+            background-color: #77ac1b;
+            border: 2px solid;
+            border-radius: 20px/50px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+        }
+
+        .button:hover {
+            border: 1px solid white;
+        }
+
+        button:active {
+            box-shadow: 4px 4px 12px #c5c5c5,
+                -4px -4px 12px #ffffff;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .overlay:target {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 50%;
+            position: relative;
+            transition: all 5s ease-in-out;
+        }
+
+
+        .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .popup .close:hover {
+            color: #06D85F;
+        }
+
+        .popup .content {
+            max-height: 30%;
+            overflow: auto;
+        }
+
+        @media screen and (max-width: 700px) {
+            .box {
+                width: 70%;
+            }
+
+            .popup {
+                width: 70%;
+            }
+        }
+
+        .pin {
+            width: 60px;
+            height: 30px;
+            font-size: 16px;
+            margin-left: 35%;
+            padding-left: 20px;
+        }
+        .six-digit {
+      text-align: center;
+      color: rgb(0, 0, 0);
+      font-weight: 500;
+    }
+    * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+.keypad-digit {
+  width: 250px;
+  margin: 50px auto;
+  background: #77ac1b;
+  padding: 20px 15px;
+  text-align: center;
+  box-shadow: 0px 5px 5px -0px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+input[type="password"] {
+  padding: 0 40px;
+  border-radius: 5px;
+  width: 140px;
+  height: 50px;
+  margin: auto;
+  margin-bottom: 20px;
+  border: 1px solid rgb(228, 220, 220);
+  outline: none;
+  font-size: 21px;
+  color: transparent;
+  text-shadow: 0 0 0 rgb(84, 84, 84);
+  text-align: center;
+}
+
+input:focus {
+  outline: none;
+}
+
+.pinButton {
+  border: none;
+  background: none;
+  font-size: 14px;
+  border-radius: 50%;
+  height: 30px;
+  font-weight: 550;
+  width: 30px;
+  color: transparent;
+  text-shadow: 0 0 0 rgb(255, 255, 255);
+  margin: 7px 20px;
+}
+
+.clear,
+.enter {
+  font-size: 10px !important;
+}
+
+.pinButton:hover {
+  box-shadow: #506ce8 0 0 1px 1px;
+}
+.pinButton:active {
+  background: #506ce8;
+  color: #fff;
+}
+.clear:hover {
+  box-shadow: #ff3c41 0 0 1px 1px;
+}
+.clear:active {
+  background: #ff3c41;
+  color: #fff;
+}
+.enter:hover {
+  box-shadow: #47cf73 0 0 1px 1px;
+}
+.enter:active {
+  background: #47cf73;
+  color: #fff;
+}
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="header-nav">
+        <div class="logo">
+            <img src="company-logo.png" alt="Logo">
+            <p class="portal">
+                Employee Portal
+            </p>
+        </div>
+        <div class="header" href="homepage.html">
+            <a class="selected-icon">
+                Home
+            </a>
+            <a class="header-icon" href="employee-payment-status.html">
+                Employee Payment Status
+            </a>
+            <a class="header-icon" href="login.html">
+                Log out
+            </a>
+
+            <div class="globe-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="45.523" height="20.487" viewBox="0 0 49.523 24.487">
+                    <defs>
+                        <clipPath id="prefix__clip-path">
+                            <path id="prefix__Clip_2" d="M0 0h14.477v22.218H0z" class="prefix__cls-1" data-name="Clip 2"
+                                transform="translate(0 1.006)" />
+                        </clipPath>
+                        <clipPath id="prefix__clip-path-2">
+                            <path id="prefix__Clip_5" d="M0 0h6.018v5.289H0z" class="prefix__cls-1" data-name="Clip 5"
+                                transform="translate(11.452 -1.263)" />
+                        </clipPath>
+                        <clipPath id="prefix__clip-path-3">
+                            <path id="prefix__Clip_8" d="M0 0h29.119v23.087H0z" class="prefix__cls-1" data-name="Clip 8"
+                                transform="translate(20.403 .052)" />
+                        </clipPath>
+                        <style>
+                            .prefix__cls-1 {
+                                fill: none
+                            }
+
+                            .prefix__cls-3 {
+                                fill: #77ac1b
+                            }
+                        </style>
+                    </defs>
+                    <g id="prefix__Group_5_Copy_2" data-name="Group 5 Copy 2" transform="translate(0 1.263)">
+                        <path id="prefix__Clip_2-2" d="M0 0h14.477v22.218H0z" class="prefix__cls-1" data-name="Clip 2"
+                            transform="translate(0 1.006)" />
+                        <g id="prefix__Group_5_Copy_2-2" clip-path="url(#prefix__clip-path)" data-name="Group 5 Copy 2">
+                            <path id="prefix__Fill_1"
+                                d="M.945 2.975H.612c-.056 0-.056 0-.111-.056l-.445-.28A.2.2 0 0 1 0 2.526v-.842a.178.178 0 0 1 .167-.168H.89c.111 0 .222-.112.167-.225L1 .842a.647.647 0 0 1 .723-.786l5.5.73A.2.2 0 0 0 7.394.73l.167-.225A1.286 1.286 0 0 1 8.617 0l1.39.112a.839.839 0 0 1 .723 1.067l-.056.225a.12.12 0 0 1-.111.112l-.663.393a.349.349 0 0 0 .056.618.445.445 0 0 0 .612-.168c.056-.056.056-.056.111-.056l.89-.168a1.006 1.006 0 0 1 1.056.505l.167.281c.056.056.111.112.167.112a.382.382 0 0 1 .389.393v.561a.678.678 0 0 1-.778.674l-1.723-.168a.24.24 0 0 0-.222.225 1.1 1.1 0 0 1-.5 1.179l-1.445.954c-.056.056-.111.112-.111.168v.561a.178.178 0 0 1-.167.168h-.063c-.056 0-.111-.056-.167-.056l-.445-.618c-.056-.056-.111-.112-.222-.056l-1.167.337a.12.12 0 0 0-.111.112l-.334.73a.206.206 0 0 0 .107.28l.5.168c.056 0 .111.112.111.168v.449a.148.148 0 0 0 .167.168l.278.056a.773.773 0 0 1 .612.674.178.178 0 0 0 .167.168h2.613a.2.2 0 0 1 .167.056l.612.674a.2.2 0 0 0 .167.056h.612a.179.179 0 0 1 .167.168v.393a.148.148 0 0 0 .167.168l1.223.168a.12.12 0 0 1 .111.112l.667 1.123a1.032 1.032 0 0 1-.167 1.235l-.445.505a.208.208 0 0 0-.056.168l.056.168a2.26 2.26 0 0 1-.723 2.021l-1.056.954a2.1 2.1 0 0 0-.723 1.572v1.071c0 .057.056.168.111.168l.5.281a.225.225 0 0 1 .111.225l-.056.112a.731.731 0 0 1-1.056.394l-.167-.113a1.022 1.022 0 0 1-.5-1.067l.056-.224c0-.057 0-.169-.111-.169a1.281 1.281 0 0 1-.556-1.067v-3.255c0-.056-.056-.112-.111-.168l-.389-.225a1.179 1.179 0 0 1-.5-1.347l.056-.112a.34.34 0 0 0-.056-.225l-1.056-.9a.208.208 0 0 1-.056-.168v-.9a.148.148 0 0 1 .167-.168l.278-.056a.12.12 0 0 0 .111-.112l.167-.561a.34.34 0 0 0-.056-.225l-.167-.168a.168.168 0 0 0-.222 0l-.278.168c-.111.056-.278 0-.278-.112l-.056-.505c0-.056-.056-.112-.111-.168l-.612-.225c-.056 0-.111-.112-.111-.168a.148.148 0 0 0-.167-.168l-1.331-.337a.71.71 0 0 1-.445-.954c.056-.056 0-.168-.056-.225l-1.056-1.01a.208.208 0 0 1-.056-.168l.222-2.47a.148.148 0 0 1 .167-.168.715.715 0 0 0 .612-.674l.056-.449c0-.056 0-.056-.056-.112l-.5-.786C3.614 2.3 3.558 2.3 3.5 2.246L2 2.133c-.111 0-.167.056-.222.168a.871.871 0 0 1-.834.674"
+                                class="prefix__cls-3" data-name="Fill 1" transform="translate(0 1.006)" />
+                        </g>
+                        <path id="prefix__Clip_5-2" d="M0 0h6.018v5.289H0z" class="prefix__cls-1" data-name="Clip 5"
+                            transform="translate(11.452 -1.263)" />
+                        <g id="prefix__Group_5_Copy_2-3" clip-path="url(#prefix__clip-path-2)"
+                            data-name="Group 5 Copy 2">
+                            <path id="prefix__Fill_4"
+                                d="M1.5 3.841l-.666-.112A.429.429 0 0 1 .5 3.167l.056-.225A.374.374 0 0 0 .5 2.606l-.445-.9A.208.208 0 0 1 0 1.539v-.225A.409.409 0 0 1 .334.921l3.058-.9a.339.339 0 0 1 .334.056l1.89 1.235a.309.309 0 0 1 .167.281L6 2.606a.4.4 0 0 1-.278.505l-1.279.505a.768.768 0 0 0-.222.168l-.774 1.292a.38.38 0 0 1-.5.168l-.278-.112a.42.42 0 0 1-.222-.112l-.778-.954c0-.168-.056-.225-.167-.225"
+                                class="prefix__cls-3" data-name="Fill 4" transform="translate(11.452 -1.263)" />
+                        </g>
+                        <path id="prefix__Clip_8-2" d="M0 0h29.119v23.087H0z" class="prefix__cls-1" data-name="Clip 8"
+                            transform="translate(20.403 .052)" />
+                        <g id="prefix__Group_5_Copy_2-4" clip-path="url(#prefix__clip-path-3)"
+                            data-name="Group 5 Copy 2">
+                            <path id="prefix__Fill_7"
+                                d="M29.02 1.909a.222.222 0 0 0-.22-.109l-2.336.337a.331.331 0 0 1-.222-.056l-.667-.786c-.056-.056-.056-.056-.111-.056L22.349.674h-.111l-1.668.337a2.116 2.116 0 0 1-1.891-.506A1.75 1.75 0 0 0 17.4 0h-3.836c-.055 0-.111 0-.111.056l-.833.562c-.056.056-.111.112-.111.168a.656.656 0 0 1-.445.618l-.556.168a.332.332 0 0 1-.445-.225.286.286 0 0 0-.222-.112H8.45L6.838.73a1.676 1.676 0 0 0-1.167.056l-.445.225a1.3 1.3 0 0 0-.778.842l-.167.447a1.137 1.137 0 0 0 .056.954l.166.281a.29.29 0 0 0 .223.112h.222a.837.837 0 0 0 .779-.561c0-.056.055-.112.166-.168l.334-.112c.167-.056.278.056.334.225l.055.618a.865.865 0 0 1-.556.9l-.889.337a.212.212 0 0 1-.278-.168l-.112-.449a.178.178 0 0 0-.167-.169l-.39-.056c-.166 0-.278.056-.278.225v.561c0 .112-.055.168-.166.225l-.834.225a.121.121 0 0 0-.112.112l-.278.561a.173.173 0 0 0 0 .225l.112.225a.247.247 0 0 1-.222.337.561.561 0 0 0-.556.674L2 7.86c0 .112.112.168.223.168h.667c.111 0 .167-.056.222-.168l.112-.337c0-.112.111-.168.222-.168l.723.056c.055 0 .111 0 .111-.056l.389-.225A.261.261 0 0 1 5 7.186l.389.561c.056.056.056.112.056.225v.056c-.056.168.166.393.333.281l.111-.056A.206.206 0 0 0 6 7.972L5.781 7.3a.206.206 0 0 1 .111-.281h.056a.243.243 0 0 1 .278.056l.278.337a1.128 1.128 0 0 0 1.279.388h.055c.112-.056.167 0 .223.056l.667.674c.056.056.056.112.056.225l-.112.618a.178.178 0 0 1-.166.168l-1.891.449h-.167l-1.055-.502a.12.12 0 0 1-.111-.112 1.367 1.367 0 0 0-1.223-.786l-.834-.056a.2.2 0 0 0-.167.056l-1.39 1.122a3.441 3.441 0 0 0-1.279 2.3c0 .056-.056.112-.111.168l-.167.112a.291.291 0 0 0-.111.227A2.7 2.7 0 0 0 .945 14.6l.5.449a.2.2 0 0 0 .167.056H3.78c.056 0 .111 0 .111.056l.611.393c.056.056.112.112.112.168l.055 1.067a.294.294 0 0 0 .111.225l.723.337c.111.056.167.112.111.225l-.222 1.964a1.936 1.936 0 0 0 .278 1.236l.278.393c0 .056.056.056.056.112l.055.561a1.367 1.367 0 0 0 1.112 1.235 1.423 1.423 0 0 0 1.223-.393l.334-.281a2.9 2.9 0 0 0 .834-2.077v-.618c0-.056.056-.169.111-.169l.5-.392a1.711 1.711 0 0 0 .667-1.4v-1.4a.209.209 0 0 1 .055-.168L11.952 15c.055-.056.055-.112.055-.225a1.482 1.482 0 0 0-1-1.067l-.112-.056a.892.892 0 0 1-.667-.842.9.9 0 0 0-.278-.618l-.389-.393a.206.206 0 0 1-.056-.168l.056-.73a.24.24 0 0 1 .222-.225h-.165c.055 0 .166.056.166.112l.946 1.112a.209.209 0 0 1 .055.168v.561c0 .112.056.225.167.225l.334.112h.166l1.057-.618a.712.712 0 0 0 .222-1.067l-.723-1.067a.206.206 0 0 1 .167-.337l.612-.056c.111 0 .167.056.222.168l.223.561c0 .056.055.056.055.112l1.223.9h.056l.778.337c.112.056.167.112.167.225l-.111.337a1.546 1.546 0 0 0 .445 1.291l.723.674a.589.589 0 0 0 .945-.225l.778-2.133a.306.306 0 0 1 .278-.168l.723.112a.178.178 0 0 1 .167.168l.611 1.74c0 .056.056.056.056.112l.222.225a.221.221 0 0 0 .39-.168l-.056-.393c0-.168.111-.281.222-.225.056 0 .112.056.167.056a.6.6 0 0 0 .779.112l.5-.337a.292.292 0 0 0 .111-.225l-.061-2.13c0-.112.055-.225.166-.225l.612-.168a.178.178 0 0 0 .167-.168l.278-1.011a.337.337 0 0 0-.056-.225l-.384-.45a1.022 1.022 0 0 1-.111-1.179l.111-.281c.056-.056.111-.112.167-.112a.67.67 0 0 0 .556-.393L25.3 3.761a.265.265 0 0 1 .333-.112l.334.168c.056.056.111.112.111.168v.786a.294.294 0 0 0 .106.229.582.582 0 0 0 .779-.281l.5-1.067c0-.056.056-.056.111-.112l1.112-.674a.634.634 0 0 0 .334-.954"
+                                class="prefix__cls-3" data-name="Fill 7" transform="translate(20.403 .052)" />
+                            <path id="prefix__Fill_10"
+                                d="M.834 0A.4.4 0 0 0 .5.168L.056.785A.34.34 0 0 0 0 1.011v.954c0 .112.056.168.111.281l.167.168a.423.423 0 0 0 .5.112.559.559 0 0 0 .222-.28L1.334.561a.344.344 0 0 0-.166-.393L1.112.112A.928.928 0 0 0 .834 0"
+                                class="prefix__cls-3" data-name="Fill 10" transform="translate(31.299 18.241)" />
+                            <path id="prefix__Fill_12"
+                                d="M.667 1.46l.389-.112a.372.372 0 0 0 .222-.281V.281A.264.264 0 0 0 1 0C.89 0 .723.112.723.225L.667.449a.24.24 0 0 1-.222.225H.222C.056.674 0 .842 0 .954v.112a.256.256 0 0 0 .222.281l.334.053c0 .056.056.056.111.056"
+                                class="prefix__cls-3" data-name="Fill 12" transform="translate(22.015 3.364)" />
+                            <path id="prefix__Fill_14"
+                                d="M3 .464L2.835.239a.418.418 0 0 0-.222-.112L1.779.3c-.056 0-.111.056-.167.112l-.5.618A.194.194 0 0 1 1 1.081l-.389.169A1.206 1.206 0 0 0 0 2.316l.055.842a.24.24 0 0 0 .223.225H1.89a.2.2 0 0 1 .167.056l.445.393c.055 0 .055.056.111.056l1.279.281c.111 0 .222 0 .278-.112l.667-.9a.209.209 0 0 0 .055-.168V1.811L4.17.127a.12.12 0 0 0-.112-.112c-.166-.056-.389.056-.389.225a.312.312 0 0 1-.333.28L3.169.464C3.058.576 3 .52 3 .464"
+                                class="prefix__cls-3" data-name="Fill 14" transform="translate(40.862 17.16)" />
+                            <path id="prefix__Fill_16"
+                                d="M.431.6L.6.94a.255.255 0 0 1 0 .281l-.558 1.46a.358.358 0 0 0 0 .337l.167.282a.371.371 0 0 0 .391.223.418.418 0 0 0 .387-.223l.667-1.179a.421.421 0 0 0 .056-.281L1.432.491a.461.461 0 0 0-.223-.337L.987.042a.6.6 0 0 0-.445 0A.7.7 0 0 0 .431.6"
+                                class="prefix__cls-3" data-name="Fill 16" transform="translate(44.934 6.409)" />
+                            <path id="prefix__Fill_18"
+                                d="M1.634.12l-.111.168a.055.055 0 0 1-.056.056l-.333.618a.12.12 0 0 1-.112.112l-.89.73a.439.439 0 0 0-.111.449l.055.112a.375.375 0 0 0 .334.225h.446a.375.375 0 0 0 .333-.225L1.523 1.3c0-.057.056-.113.111-.169l.5-.392A.358.358 0 0 0 2.19.232L2.134.177a.287.287 0 0 0-.5-.057"
+                                class="prefix__cls-3" data-name="Fill 18" transform="translate(44.954 20.423)" />
+                        </g>
+                    </g>
+                </svg>
+
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <div class="left-page">
+            <div class="left-side">
+                <div class="process">
+                    <span class="legal-info"> Contract Approval <img class="done" src="icons8-ok-144.png"
+                            alt="Done"> <a href="company-contract-ward-letter.pdf"> View>></a></span>
+                </div>
+                <div class="processing">
+                    <span class="legal-info"> Employee Legal Information <img class="done" src="icons8-ok-144.png"
+                            alt="Done"></span>
+                </div>
+                <div class="processing">
+                    <span class="legal-info"> Direct Deposit Information <img class="done" src="icons8-ok-144.png"
+                            alt="Done"></span>
+                </div>
+                <div class="pending">
+                    <span class="legal-info"> Spouse Information <img class="done" src="load-loading.gif"
+                            alt="pending"></span>
+                </div>
+                <div class="important-info">
+                    <div class="window">
+                        Important Information
+                    </div>
+                    <div class="alert">
+                        <div class="announcement-window">
+                            Announcement on Completion of form
+                        </div>
+                        <div class="announcement">
+                            Please Complete this form within 10 days, failure to do this may
+                            lead to termination of your contract. Thank you!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="loading">
+
+                    <div id="wifi-loader">
+                        <svg class="circle-outer" viewBox="0 0 86 86">
+                            <circle class="back" cx="43" cy="43" r="40"></circle>
+                            <circle class="front" cx="43" cy="43" r="40"></circle>
+                            <circle class="new" cx="43" cy="43" r="40"></circle>
+                        </svg>
+                        <svg class="circle-middle" viewBox="0 0 60 60">
+                            <circle class="back" cx="30" cy="30" r="27"></circle>
+                            <circle class="front" cx="30" cy="30" r="27"></circle>
+                        </svg>
+                        <svg class="circle-inner" viewBox="0 0 34 34">
+                            <circle class="back" cx="17" cy="17" r="14"></circle>
+                            <circle class="front" cx="17" cy="17" r="14"></circle>
+                        </svg>
+                        <span class="text" data-text="payment pending"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="center-page">
+            <div class="nok">
+                <h1>
+                    Spouse  Legal Information
+                </h1>
+            </div>
+            <div>
+                <form action="#popup1">
+                    <div class="control">
+                        <label for="name">First name</label> <span class="required">*</span>
+                        <input class="fname" type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="control">
+                        <label for="mname">M</label>
+                        <input class="mname" type="text" id="mname" name="mname" maxlength="1">
+                    </div>
+
+                    <div class="control">
+                        <label for="lname">Last name</label> <span class="required">*</span>
+                        <input class="lname" type="text" id="lname" name="lname" required>
+                    </div>
+
+                    <div class="control">
+                        <label for="dob">Date of birth</label> <span class="required">*</span>
+                        <input class="dob" type="date" id="dob" name="trip-start" value="2018-07-22" min="1908-01-01"
+                            max="2018-12-31">
+                    </div>
+
+                    <div class="control">
+                        <input class="sex" type="radio" name="gender" id="male">
+                        <label for="male">Male</label> <span class="required">*</span>
+                        <input class="sex" type="radio" name="gender" id="female">
+                        <label for="female">Female</label><span class="required">*</span>
+                    </div>
+
+                    <div class="control">
+                        <label for="address">Address</label> <span class="required">*</span>
+                        <input class="address" type="text" id="address" name="address" required>
+                    </div>
+
+                    <div class="control">
+                        <label for="city">City</label> <span class="required">*</span>
+                        <input class="city" type="text" id="city" name="city" required>
+                    </div>
+
+                    <div class="control">
+                        <label for="state">State</label> <span class="required">*</span>
+                        <input class="state" type="text" id="state" name="state" required>
+                    </div>
+
+                    <div>
+                        <label class="control" for="country">Country</label><span
+                            style="color: red !important; display: inline; float: none;">*</span>
+
+                        <select class="country" id="country" name="country" class="form-control">
+                            <option value="Afghanistan">Afghanistan</option>
+                            <option value="Åland Islands">Åland Islands</option>
+                            <option value="Albania">Albania</option>
+                            <option value="Algeria">Algeria</option>
+                            <option value="American Samoa">American Samoa</option>
+                            <option value="Andorra">Andorra</option>
+                            <option value="Angola">Angola</option>
+                            <option value="Anguilla">Anguilla</option>
+                            <option value="Antarctica">Antarctica</option>
+                            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Armenia">Armenia</option>
+                            <option value="Aruba">Aruba</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Austria">Austria</option>
+                            <option value="Azerbaijan">Azerbaijan</option>
+                            <option value="Bahamas">Bahamas</option>
+                            <option value="Bahrain">Bahrain</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Barbados">Barbados</option>
+                            <option value="Belarus">Belarus</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Belize">Belize</option>
+                            <option value="Benin">Benin</option>
+                            <option value="Bermuda">Bermuda</option>
+                            <option value="Bhutan">Bhutan</option>
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                            <option value="Botswana">Botswana</option>
+                            <option value="Bouvet Island">Bouvet Island</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                            <option value="Brunei Darussalam">Brunei Darussalam</option>
+                            <option value="Bulgaria">Bulgaria</option>
+                            <option value="Burkina Faso">Burkina Faso</option>
+                            <option value="Burundi">Burundi</option>
+                            <option value="Cambodia">Cambodia</option>
+                            <option value="Cameroon">Cameroon</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Cape Verde">Cape Verde</option>
+                            <option value="Cayman Islands">Cayman Islands</option>
+                            <option value="Central African Republic">Central African Republic</option>
+                            <option value="Chad">Chad</option>
+                            <option value="Chile">Chile</option>
+                            <option value="China">China</option>
+                            <option value="Christmas Island">Christmas Island</option>
+                            <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Comoros">Comoros</option>
+                            <option value="Congo">Congo</option>
+                            <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The
+                            </option>
+                            <option value="Cook Islands">Cook Islands</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Cote D'ivoire">Cote D'ivoire</option>
+                            <option value="Croatia">Croatia</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="Cyprus">Cyprus</option>
+                            <option value="Czech Republic">Czech Republic</option>
+                            <option value="Denmark">Denmark</option>
+                            <option value="Djibouti">Djibouti</option>
+                            <option value="Dominica">Dominica</option>
+                            <option value="Dominican Republic">Dominican Republic</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="Egypt">Egypt</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Equatorial Guinea">Equatorial Guinea</option>
+                            <option value="Eritrea">Eritrea</option>
+                            <option value="Estonia">Estonia</option>
+                            <option value="Ethiopia">Ethiopia</option>
+                            <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                            <option value="Faroe Islands">Faroe Islands</option>
+                            <option value="Fiji">Fiji</option>
+                            <option value="Finland">Finland</option>
+                            <option value="France">France</option>
+                            <option value="French Guiana">French Guiana</option>
+                            <option value="French Polynesia">French Polynesia</option>
+                            <option value="French Southern Territories">French Southern Territories</option>
+                            <option value="Gabon">Gabon</option>
+                            <option value="Gambia">Gambia</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Ghana">Ghana</option>
+                            <option value="Gibraltar">Gibraltar</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Greenland">Greenland</option>
+                            <option value="Grenada">Grenada</option>
+                            <option value="Guadeloupe">Guadeloupe</option>
+                            <option value="Guam">Guam</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Guernsey">Guernsey</option>
+                            <option value="Guinea">Guinea</option>
+                            <option value="Guinea-bissau">Guinea-bissau</option>
+                            <option value="Guyana">Guyana</option>
+                            <option value="Haiti">Haiti</option>
+                            <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+                            <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="Hong Kong">Hong Kong</option>
+                            <option value="Hungary">Hungary</option>
+                            <option value="Iceland">Iceland</option>
+                            <option value="India">India</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                            <option value="Iraq">Iraq</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="Isle of Man">Isle of Man</option>
+                            <option value="Israel">Israel</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Jamaica">Jamaica</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Jersey">Jersey</option>
+                            <option value="Jordan">Jordan</option>
+                            <option value="Kazakhstan">Kazakhstan</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Kiribati">Kiribati</option>
+                            <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic
+                                of</option>
+                            <option value="Korea, Republic of">Korea, Republic of</option>
+                            <option value="Kuwait">Kuwait</option>
+                            <option value="Kyrgyzstan">Kyrgyzstan</option>
+                            <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                            <option value="Latvia">Latvia</option>
+                            <option value="Lebanon">Lebanon</option>
+                            <option value="Lesotho">Lesotho</option>
+                            <option value="Liberia">Liberia</option>
+                            <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                            <option value="Liechtenstein">Liechtenstein</option>
+                            <option value="Lithuania">Lithuania</option>
+                            <option value="Luxembourg">Luxembourg</option>
+                            <option value="Macao">Macao</option>
+                            <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav
+                                Republic of</option>
+                            <option value="Madagascar">Madagascar</option>
+                            <option value="Malawi">Malawi</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Maldives">Maldives</option>
+                            <option value="Mali">Mali</option>
+                            <option value="Malta">Malta</option>
+                            <option value="Marshall Islands">Marshall Islands</option>
+                            <option value="Martinique">Martinique</option>
+                            <option value="Mauritania">Mauritania</option>
+                            <option value="Mauritius">Mauritius</option>
+                            <option value="Mayotte">Mayotte</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                            <option value="Moldova, Republic of">Moldova, Republic of</option>
+                            <option value="Monaco">Monaco</option>
+                            <option value="Mongolia">Mongolia</option>
+                            <option value="Montenegro">Montenegro</option>
+                            <option value="Montserrat">Montserrat</option>
+                            <option value="Morocco">Morocco</option>
+                            <option value="Mozambique">Mozambique</option>
+                            <option value="Myanmar">Myanmar</option>
+                            <option value="Namibia">Namibia</option>
+                            <option value="Nauru">Nauru</option>
+                            <option value="Nepal">Nepal</option>
+                            <option value="Netherlands">Netherlands</option>
+                            <option value="Netherlands Antilles">Netherlands Antilles</option>
+                            <option value="New Caledonia">New Caledonia</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Niger">Niger</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Niue">Niue</option>
+                            <option value="Norfolk Island">Norfolk Island</option>
+                            <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                            <option value="Norway">Norway</option>
+                            <option value="Oman">Oman</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="Palau">Palau</option>
+                            <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                            <option value="Panama">Panama</option>
+                            <option value="Papua New Guinea">Papua New Guinea</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Peru">Peru</option>
+                            <option value="Philippines">Philippines</option>
+                            <option value="Pitcairn">Pitcairn</option>
+                            <option value="Poland">Poland</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Puerto Rico">Puerto Rico</option>
+                            <option value="Qatar">Qatar</option>
+                            <option value="Reunion">Reunion</option>
+                            <option value="Romania">Romania</option>
+                            <option value="Russian Federation">Russian Federation</option>
+                            <option value="Rwanda">Rwanda</option>
+                            <option value="Saint Helena">Saint Helena</option>
+                            <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                            <option value="Saint Lucia">Saint Lucia</option>
+                            <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                            <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+                            <option value="Samoa">Samoa</option>
+                            <option value="San Marino">San Marino</option>
+                            <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Senegal">Senegal</option>
+                            <option value="Serbia">Serbia</option>
+                            <option value="Seychelles">Seychelles</option>
+                            <option value="Sierra Leone">Sierra Leone</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Slovakia">Slovakia</option>
+                            <option value="Slovenia">Slovenia</option>
+                            <option value="Solomon Islands">Solomon Islands</option>
+                            <option value="Somalia">Somalia</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="South Georgia and The South Sandwich Islands">South Georgia and The South
+                                Sandwich Islands</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="Sudan">Sudan</option>
+                            <option value="Suriname">Suriname</option>
+                            <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                            <option value="Swaziland">Swaziland</option>
+                            <option value="Sweden">Sweden</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                            <option value="Taiwan">Taiwan</option>
+                            <option value="Tajikistan">Tajikistan</option>
+                            <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                            <option value="Thailand">Thailand</option>
+                            <option value="Timor-leste">Timor-leste</option>
+                            <option value="Togo">Togo</option>
+                            <option value="Tokelau">Tokelau</option>
+                            <option value="Tonga">Tonga</option>
+                            <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                            <option value="Tunisia">Tunisia</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Turkmenistan">Turkmenistan</option>
+                            <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                            <option value="Tuvalu">Tuvalu</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Ukraine">Ukraine</option>
+                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="United States">United States</option>
+                            <option value="United States Minor Outlying Islands">United States Minor Outlying Islands
+                            </option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Uzbekistan">Uzbekistan</option>
+                            <option value="Vanuatu">Vanuatu</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Viet Nam">Viet Nam</option>
+                            <option value="Virgin Islands, British">Virgin Islands, British</option>
+                            <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                            <option value="Wallis and Futuna">Wallis and Futuna</option>
+                            <option value="Western Sahara">Western Sahara</option>
+                            <option value="Yemen">Yemen</option>
+                            <option value="Zambia">Zambia</option>
+                            <option value="Zimbabwe">Zimbabwe</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="control">
+                            <label for="zipcode">Zipcode</label> <span class="required">*</span>
+                            <input class="zipcode" type="zipcode" id="zipcode" name="zipcode" maxlength="9" required>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <label for="phone">Phone number</label> <span class="required">*</span>
+                        <input class="phone" type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                            placeholder="1234567890" maxlength="14" required>
+                    </div>
+
+                    <div class="control">
+                        <label for="email">Email</label> <span class="required">*</span>
+                        <input class="email" type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label class="control" for="country">Relation</label><span
+                            style="color: red !important; display: inline; float: none;">*</span>
+
+                        <select class="country" id="country" name="country" class="form-control">
+                            <option value="Åland Islands">Spouse</option>
+                            <option value="Albania">Family member</option>
+                            <option value="Algeria">Friend</option>
+                        </select>
+                        <br><br>
+                    </div>
+
+                    <div class="box">
+                        <input class="button" type="submit" value="Submit">
+                    </div>
+
+                </form>
+                
+
+                <div id="popup1" class="overlay">
+                    <div class="popup">
+
+                        
+
+
+                        <p class="six-digit">
+                            Please input the 6 digit code sent to you
+                          </p>
+                          <div id="pinpad">
+                            <form class="keypad-digit">
+                              <input type="password" id="password" /></br>
+                              <input type="button" value="1" id="1" class="pinButton calc" />
+                              <input type="button" value="2" id="2" class="pinButton calc" />
+                              <input type="button" value="3" id="3" class="pinButton calc" /><br>
+                              <input type="button" value="4" id="4" class="pinButton calc" />
+                              <input type="button" value="5" id="5" class="pinButton calc" />
+                              <input type="button" value="6" id="6" class="pinButton calc" /><br>
+                              <input type="button" value="7" id="7" class="pinButton calc" />
+                              <input type="button" value="8" id="8" class="pinButton calc" />
+                              <input type="button" value="9" id="9" class="pinButton calc" /><br>
+                              <input type="button" value="clear" id="clear" class="pinButton clear" />
+                              <input type="button" value="0" id="0 " class="pinButton calc" />
+                              <input type="button" value="enter" id="enter" class="pinButton enter" />
+                            </form>
+                          </div>
+                          <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                          <script src="./js/app.js"></script>
+                          <script type="text/javascript">
+                        
+                            var _gaq = _gaq || [];
+                            _gaq.push(['_setAccount', 'UA-36251023-1']);
+                            _gaq.push(['_setDomainName', 'jqueryscript.net']);
+                            _gaq.push(['_trackPageview']);
+                        
+                            (function () {
+                              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                            })();
+                        
+                          </script>
+                          <script>
+                            try {
+                              fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function (response) {
+                                return true;
+                              }).catch(function (e) {
+                                var carbonScript = document.createElement("script");
+                                carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+                                carbonScript.id = "_carbonads_js";
+                                document.getElementById("carbon-block").appendChild(carbonScript);
+                              });
+                            } catch (error) {
+                              console.log(error);
+                            }
+                            $(document).ready(function () {
+const input_value = $("#password");
+
+//disable input from typing
+
+$("#password").keypress(function () {
+return false;
+});
+
+//add password
+$(".calc").click(function () {
+let value = $(this).val();
+field(value);
+});
+function field(value) {
+input_value.val(input_value.val() + value);
+}
+$("#clear").click(function () {
+input_value.val("");
+});
+$("#enter").click(function () {
+alert("expired OTP");
+});
+});
+
+
+
+
+                          </script>
+
+
+
+
+
+                        <a class="close" href="#">&times;</a>
+                        <div class="content">
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
